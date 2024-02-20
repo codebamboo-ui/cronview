@@ -1,0 +1,12 @@
+jobs:
+  - name: prune-cache
+    schedule: "0 3 * * 0"
+    image: alpine:3.19
+    command: "sh -c 'rm -rf /cache/*'"
+    tags: [maintenance]
+  - name: sync-reports
+    schedule: "*/15 * * * *"
+    image: alpine/curl:8.6
+    command: "curl -s https://example.com/reports"
+    tags: [reports, sync]
+

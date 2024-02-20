@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import argparse
+from pathlib import Path
+from datetime import datetime
+from cronview.parser import load_schedule
+from cronview.cron import explain, next_runs
+
+
+def main():
+    ap = argparse.ArgumentParser(description="DockerDesk cron viewer")
+    ap.add_argument("file", type=str, help="YAML schedule file")
+    args = ap.parse_args()
+
+    text = Path(args.file).read_text(encoding="utf-8")
+    sched = load_schedule(text)
+
+    now = datetime.now()
+    for job in sched.jobs:
+        print(f"- {job.name}")
+        print(f"  schedule: {job.schedule} -> {explain(job.schedule)}")
+        runs = next_runs(job.schedule, now, 3)
+        if runs:
+            print("  next:")
+            for r in runs:
+                print(f"    - {r}")
+        if job.image:
+            print(f"  image: {job.image}")
+        if job.command:
+            print(f"  command: {job.command}")
+        if job.tags:
+            print(f"  tags: {', '.join(job.tags)}")
+
+
+if __name__ == "__main__":
+    main()
+
