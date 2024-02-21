@@ -1,0 +1,13 @@
+[project]
+name = "dockerdesk-cronview"
+version = "0.0.1"
+description = "Curate and visualize container cron-like schedules"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pyyaml>=6.0.1",
+]
+
+[project.scripts]
+cronview = "cronview.__main__:main"
+
