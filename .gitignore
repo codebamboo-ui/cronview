@@ -1,17 +1,17 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
+__pycache__/
 
 # Virtual environments
-.venv/
 venv/
+.venv/
 
 # macOS
 .DS_Store
 
 # Editors
-.idea/
 .vscode/
+.idea/
 
 # Build artifacts
 dist/
@@ -20,4 +20,3 @@ build/
 
 # Logs
 *.log
-
